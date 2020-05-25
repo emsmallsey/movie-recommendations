@@ -1,2 +1,2 @@
 # movie-recommendations
-Movie Recommendation App
+Movie Recommendation App using TMBDApi
