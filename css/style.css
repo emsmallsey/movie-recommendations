@@ -1,0 +1,61 @@
+body {
+    background-color: lightcyan;
+}
+
+.jumbotron {
+    background-image: url("https://media.giphy.com/media/3osxYliokw0RKomKcg/giphy.gif");
+    background-color: transparent;
+    background-size: cover;
+    color: white;
+}
+
+.card {
+    max-width: 200px;
+    display:inline-block;
+    border-radius: 100%;
+    border-color: white;
+
+}
+
+.card-img {
+    border-radius: 0%;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* display 3 */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(33.333%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-33.333%);
+    }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
