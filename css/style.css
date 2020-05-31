@@ -1,5 +1,5 @@
 body {
-    background-color: lightcyan;
+    background-color:green;
 }
 
 .jumbotron {
@@ -9,17 +9,32 @@ body {
     color: white;
 }
 
-.card {
-    max-width: 200px;
-    display:inline-block;
-    border-radius: 100%;
-    border-color: white;
-
+#title {
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 200;
+    font-size: 100px;
 }
 
-.card-img {
-    border-radius: 0%;
+#subtitle {
+    font-family: 'Teko', sans-serif;
+    font-weight: 300;
 }
+
+#title-input {
+    float: left;
+    width: 85%;
+}
+
+#search-btn {
+    float: right;
+    width: 10%;
+}
+
+.searched-posters {
+  max-width: 200px;
+  display: inline-block;
+}
+
 
 
 
@@ -59,3 +74,44 @@ body {
 .carousel-inner .carousel-item-left{ 
   transform: translateX(0);
 }
+
+
+
+
+
+.multi-item-carousel{
+    .carousel-inner{
+      > .item{
+        transition: 500ms ease-in-out left;
+      }
+      .active{
+        &.left{
+          left:-33%;
+        }
+        &.right{
+          left:33%;
+        }
+      }
+      .next{
+        left: 33%;
+      }
+      .prev{
+        left: -33%;
+      }
+      @media all and (transform-3d), (-webkit-transform-3d) {
+        > .item{
+          // use your favourite prefixer here
+          transition: 500ms ease-in-out left;
+          transition: 500ms ease-in-out all;
+          backface-visibility: visible;
+          transform: none!important;
+        }
+      }
+    }
+    .carousel-control { 
+        &.left, &.right{
+        background-image: none;
+      }
+    }
+  }
+  
