@@ -17,8 +17,11 @@ A simple application that uses the TMDB API to recommend similar TV shows to a u
 ## APPROACH USED
 I developed the basic logic first, leaving the complex design logic to last. 
 
-##CHALLENGES FACED
+## CHALLENGES FACED
 * Planning - I did not spend enough time planning how the complex design feature would affect the basic logic, and therefore spent a lot of time trying to make carousels work, leaving not a lot of time to spend on other additional features. 
+* Carousels - spent a lot of time mucking around with multi card carousels and then dynamically changing slides in a carousel. Hate them now. 
 
-#FURTHER IMPROVEMENTS
-* 
+## FURTHER IMPROVEMENTS
+* Add localstorage() to the watch next list
+* make the watch next list into a multi carousel
+* link the watch next list/the similar results list to a utelly API call to show what streaming services it is available on

@@ -54,7 +54,8 @@ function drawSimilarResults(_similarResults) {
 
                     $(`#${simID}`).on('click', (() => {
                         console.log('watch');
-                       
+                        addMyList(similarPosterPath, similarTitles);
+                        
                     }))
                 }  
                 
@@ -63,55 +64,25 @@ function drawSimilarResults(_similarResults) {
 }
 
 
-// $('#list-carousel').carousel({
-//     interval: 10000
-//   })
-  
-//   function multiCarousel() {
-//   $('.carousel .carousel-item').each(function(){
-//       const minPerSlide = 3;
-//       let next = $(this).next();
-//       if (!next.length) {
-//       next = $(this).siblings(':first');
-//       }
-//       next.children(':first-child').clone().appendTo($(this));
-      
-//       for (let i=0;i<minPerSlide;i++) {
-//           next=next.next();
-//           if (!next.length) {
-//               next = $(this).siblings(':first');
-//             }
-          
-//           next.children(':first-child').clone().appendTo($(this));
-//         }
-//   })};
 
-
-// function addMyList(_imdbID, _posterPath, _possibleTitles) {
-//     $('#my-list-items').prepend(`
-//                 <div class="carousel-item">
-//                     <div class="col-md-4">
-//                         <div class="card card-body" id="${_imdbID}">
-//                             <img class="img-fluid" src="${_posterPath}" alt="${_possibleTitles}">
-//                         </div>
-//                     </div>
-//                 </div>
-//             `)
-// }
+function addMyList(_posterPath, _possibleTitles) {
+    console.log("watch")
+    $(".watch-next-items").prepend(`
+                <img src="${_posterPath}" class="card-img"  alt="${_possibleTitles}" max-width="100px">
+            `)
+            
+}
 
 // ***** On Ready *****
 $(() => {
-    //multiCarousel();
+
+    
     // !!! On Search Click !!!
     $("#search-btn").on('click', async() => { 
-       
+        
         $("#searched-results").children().remove();
-        //const $carousel = $("carouselExampleControls")
-        //let ActiveElement = $carousel.find(".first");
         await $(".first").addClass("active");
         $("#similar-carousel-items-wrapper").empty();
-        // elementRemove = $carousel.find("#added");
-        // elementRemove.remove();
 
         let searched = $("#title-input").val();
         const idQuery = await queryAPI(searched); 
@@ -120,27 +91,20 @@ $(() => {
         
         const imdbID = idQuery.results[0].id; 
         
-        $('#searched-results').append(`<h2>Similar shows for ${searchedTitles}</h2>`)
+        $('#searched-results').append(`<h2 id="search-heading">Similar shows for ${searchedTitles}</h2>`)
         
         const similarResults = await querySimilar(imdbID);
-
+        $(".watch-next-heading").append(`<h2>Watch Next</h2>`);
         drawSimilarResults(similarResults);
-
-        })});
         
-        //multiCarousel();
-
-
-
-
-
-
-
-
-
-
-
-
+        
+        
+        })
+        
+    });
+        
+        
+        
 // <div class="card bg-dark text-white" data-toggle="collapse" data-target="#collapse-material" aria-expanded="false" aria-controls="collapse-material">
 // <img src="https://image.tmdb.org/t/p/w500${similarResults.results[i].poster_path}" class="card-img" alt="...">
 // <div class="card-img-overlay">

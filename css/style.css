@@ -2,8 +2,6 @@ body {
     background-color: whitesmoke;
 }
 
-
-
 .jumbotron {
     background-image: url("https://media.giphy.com/media/3osxYliokw0RKomKcg/giphy.gif");
     background-color: transparent;
@@ -17,9 +15,9 @@ body {
     font-size: 100px;
 }
 
-#subtitle {
-    font-family: 'Teko', sans-serif;
-    font-weight: 300;
+p.lead {
+  font-size: 25px;
+  font-family: 'Teko', sans-serif;
 }
 
 #title-input {
@@ -50,8 +48,12 @@ body {
   width: 500px;
 } */
 
+h2 {
+  font-family: 'Bebas Neue', cursive;
+}
+
 div.similar-posters{
-  width: 80%; /* for example */
+  width: 100%; /* for example */
   margin: auto;
 }
 
@@ -65,83 +67,8 @@ margin: auto;
   margin: 0 auto; 
 }
 
-.carousel-item active {
+div.carousel-item active {
   margin: auto;
 }
 
 
-/* 
-@media (max-width: 768px) {
-    .carousel-inner .carousel-item > div {
-        display: none;
-    }
-    .carousel-inner .carousel-item > div:first-child {
-        display: block;
-    }
-}
-
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-    display: flex;
-}
-
-/* display 3 */
-/* @media (min-width: 768px) {
-    
-    .carousel-inner .carousel-item-right.active,
-    .carousel-inner .carousel-item-next {
-      transform: translateX(33.333%);
-    }
-    
-    .carousel-inner .carousel-item-left.active, 
-    .carousel-inner .carousel-item-prev {
-      transform: translateX(-33.333%);
-    }
-}
-
-.carousel-inner .carousel-item-right,
-.carousel-inner .carousel-item-left{ 
-  transform: translateX(0);
-} */
-
-
-
-
-
-/* .multi-item-carousel{
-    .carousel-inner{
-      > .item{
-        transition: 500ms ease-in-out left;
-      }
-      .active{
-        &.left{
-          left:-33%;
-        }
-        &.right{
-          left:33%;
-        }
-      }
-      .next{
-        left: 33%;
-      }
-      .prev{
-        left: -33%;
-      }
-      @media all and (transform-3d), (-webkit-transform-3d) {
-        > .item{
-          // use your favourite prefixer here
-          transition: 500ms ease-in-out left;
-          transition: 500ms ease-in-out all;
-          backface-visibility: visible;
-          transform: none!important;
-        }
-      }
-    }
-    .carousel-control { 
-        &.left, &.right{
-        background-image: none;
-      }
-    }
-  }
-   */ 
