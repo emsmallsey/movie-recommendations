@@ -16,7 +16,6 @@
                     <div class="jumbotron">
                         <h1 class="display-4" id="title">Same Same, but Different</h1>
                         <p class="lead">Need to fill the gaping hole in your life after Cristina's death on Grey's Anatomy? Don't think you'll be able to laugh again unless it's to the tune of Seinfeld? Enter your latest TV series obsession to find some similar shows you can unhealthily binge until 3am.</p>
-                        <hr class="my-4">
                         <input type="text" class="form-control" id="title-input" placeholder="What's the last tv show you watched?">
                         <a class="btn btn-info btn-lg" href="#" id="search-btn" role="button">Search</a>
                     </div>
@@ -33,12 +32,14 @@
 <!-- Similar Results, normal carousel -->
         <div class="row">
             <div class="col-12">
-                <div id="similar-posters">
+                <div class="similar-posters">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner" id="similar-carousel">
-                            <div class="carousel-item active">                       
+                            <div class="carousel-item first active" >       
                             </div>
-                            <div id="similar-carousel-items">
+                            <div class="carousel-item" id="mainstay">        
+                            </div>
+                            <div id="similar-carousel-items-wrapper">
 
                             </div>
 
@@ -79,6 +80,7 @@
             </div> -->
             
 
+    </div>
     </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

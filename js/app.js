@@ -13,45 +13,91 @@ async function querySimilar(imdbID) {
     return response;
 }
 
-//RECIPE CAROUSEL
+function drawSimilarResults(_similarResults) {
+    if (_similarResults.results.length === 0) {
+        $("#similar-posters").append(`<p>No Similar shows found</p>`);
+    } else {
+        
+        for(let i=0; i<5; i++) {
+            const similarTitles = _similarResults.results[i].name;
+            let similarPosters = _similarResults.results[i].poster_path;
+            const similarOverview = _similarResults.results[i].overview;
+            const similarRatings = _similarResults.results[i].vote_average;
+            const simID = _similarResults.results[i].id;
+             let similarPosterPath;
 
-$('#list-carousel').carousel({
-    interval: 10000
-  })
-  
-  function multiCarousel() {
-  $('.carousel .carousel-item').each(function(){
-      const minPerSlide = 3;
-      let next = $(this).next();
-      if (!next.length) {
-      next = $(this).siblings(':first');
-      }
-      next.children(':first-child').clone().appendTo($(this));
-      
-      for (var i=0;i<minPerSlide;i++) {
-          next=next.next();
-          if (!next.length) {
-              next = $(this).siblings(':first');
+                    if(similarPosters === null) {
+                        similarPosterPath = "no-image-avail.png"; 
+                    } else {
+                        similarPosterPath = `https://image.tmdb.org/t/p/w500${similarPosters}`
+                    };
+
+                    $("#similar-carousel-items-wrapper").prepend(`
+                        <div class="carousel-item">
+                            <div class="card mb-3" style="max-width: 690px;">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="${similarPosterPath}" class="card-img d-block" alt="${similarTitles}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${similarTitles}</h5>
+                                            <p class="card-text">${similarOverview}</p>
+                                            <p class="card-text"><small class="text-muted">Rating: ${similarRatings}/10</small></p>
+                                            <button type="button" class="btn btn-outline-dark" id=${simID}>Add to Watch Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    `);
+
+                    $(`#${simID}`).on('click', (() => {
+                        console.log('watch');
+                       
+                    }))
+                }  
+                
+                
             }
-          
-          next.children(':first-child').clone().appendTo($(this));
-        }
-  })};
-
-
-  //Add to my List
-
-function addMyList(_imdbID, _posterPath, _possibleTitles) {
-    $('#my-list-items').prepend(`
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body" id="${_imdbID}">
-                            <img class="img-fluid" src="${_posterPath}" alt="${_possibleTitles}">
-                        </div>
-                    </div>
-                </div>
-            `)
 }
+
+
+// $('#list-carousel').carousel({
+//     interval: 10000
+//   })
+  
+//   function multiCarousel() {
+//   $('.carousel .carousel-item').each(function(){
+//       const minPerSlide = 3;
+//       let next = $(this).next();
+//       if (!next.length) {
+//       next = $(this).siblings(':first');
+//       }
+//       next.children(':first-child').clone().appendTo($(this));
+      
+//       for (let i=0;i<minPerSlide;i++) {
+//           next=next.next();
+//           if (!next.length) {
+//               next = $(this).siblings(':first');
+//             }
+          
+//           next.children(':first-child').clone().appendTo($(this));
+//         }
+//   })};
+
+
+// function addMyList(_imdbID, _posterPath, _possibleTitles) {
+//     $('#my-list-items').prepend(`
+//                 <div class="carousel-item">
+//                     <div class="col-md-4">
+//                         <div class="card card-body" id="${_imdbID}">
+//                             <img class="img-fluid" src="${_posterPath}" alt="${_possibleTitles}">
+//                         </div>
+//                     </div>
+//                 </div>
+//             `)
+// }
 
 // ***** On Ready *****
 $(() => {
@@ -60,81 +106,39 @@ $(() => {
     $("#search-btn").on('click', async() => { 
        
         $("#searched-results").children().remove();
-        //$("#similar-car").children().remove();
-        $("#possible-titles").append(`<h1>Search Results</h1>`);
+        //const $carousel = $("carouselExampleControls")
+        //let ActiveElement = $carousel.find(".first");
+        await $(".first").addClass("active");
+        $("#similar-carousel-items-wrapper").empty();
+        // elementRemove = $carousel.find("#added");
+        // elementRemove.remove();
 
         let searched = $("#title-input").val();
         const idQuery = await queryAPI(searched); 
-      
-        for(let i=0; i<3; i++) {
-        
-        //!!! Drawing Search Results !!!
-            const searchedTitles = idQuery.results[i].name;
-            let searchedPosters = idQuery.results[i].poster_path;
-            const imdbID = idQuery.results[i].id; 
-            let searchedPosterPath;
 
-            if(searchedPosters === null) {
-                searchedPosterPath = "no-image-avail.png"; 
-            } else {
-                searchedPosterPath = `https://image.tmdb.org/t/p/w200${searchedPosters}`
-            }
+        const searchedTitles = idQuery.results[0].name;
         
-            $('#searched-results').append(`
-                        <div id="${imdbID}" class="searched-posters">
-                            <img class="card-img" src="${searchedPosterPath}" alt="${searchedTitles}">
-                        </div>
-            `)
+        const imdbID = idQuery.results[0].id; 
         
-            // !!! Drawing Similar Results !!!        
-            $(`#${imdbID}`).on('click', (async() => {
-                console.log('clicked');
-                $("#similar-carousel-items").children().remove();
-                //$("#similar-titles").append(`<h1>Similar Shows</h1>`);
-                const similarResults = await querySimilar(imdbID);
-       
-                if (similarResults.results.length === 0) {
-                $("#similar-posters").append(`<p>No Similar shows found</p>`)
-                } else {
-                    for(let i=0; i<similarResults.results.length; i++) {
-                        const similarTitles = similarResults.results[i].name;
-                        let similarPosters = similarResults.results[i].poster_path;
-                        const similarOverview = similarResults.results[i].overview;
-                        const similarRatings = similarResults.results[i].vote_average;
-                        let similarPosterPath;
-
-                        if(similarPosters === null) {
-                            similarPosterPath = "no-image-avail.png"; 
-                        } else {
-                            similarPosterPath = `https://image.tmdb.org/t/p/w500${similarPosters}`
-                        }
-
-                        $("#similar-carousel-items").append(`
-                            <div class="carousel-item">
-                                <div class="card mb-3" style="max-width: 540px;">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            <img src="${similarPosterPath}" class="card-img d-block w-100" alt="${similarTitles}">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${similarTitles}</h5>
-                                                <p class="card-text">${similarOverview}</p>
-                                                <p class="card-text"><small class="text-muted">Rating: ${similarRatings}/10</small></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>    
-                        `);
-                    }   
-                }
-        }));
+        $('#searched-results').append(`<h2>Similar shows for ${searchedTitles}</h2>`)
         
+        const similarResults = await querySimilar(imdbID);
 
-        }
+        drawSimilarResults(similarResults);
+
+        })});
+        
         //multiCarousel();
-})})
+
+
+
+
+
+
+
+
+
+
 
 
 // <div class="card bg-dark text-white" data-toggle="collapse" data-target="#collapse-material" aria-expanded="false" aria-controls="collapse-material">
@@ -143,3 +147,40 @@ $(() => {
 //  <p class="card-text collapse" id="collapse-material">${similarResults.results[i].overview}</p>
 // </div>
 // </div>
+
+
+
+
+// for(let i=0; i<3; i++) {
+        
+//     //!!! Drawing Search Results !!!
+//         const searchedTitles = idQuery.results[i].name;
+//         let searchedPosters = idQuery.results[i].poster_path;
+//         const imdbID = idQuery.results[i].id; 
+//         let searchedPosterPath;
+
+//         if(searchedPosters === null) {
+//             searchedPosterPath = "no-image-avail.png"; 
+//         } else {
+//             searchedPosterPath = `https://image.tmdb.org/t/p/w200${searchedPosters}`
+//         }
+    
+//         $('#searched-results').append(`
+//                     <div id="${imdbID}" class="searched-posters">
+//                         <img class="card-img" src="${searchedPosterPath}" alt="${searchedTitles}">
+//                     </div>
+//         `)
+    
+//         // !!! Drawing Similar Results !!!        
+//         $(`#${imdbID}`).on('click', (async() => {
+//             console.log('clicked');
+
+
+
+// let searchedPosters = idQuery.results[0].poster_path;
+// let searchedPosterPath;
+// if(searchedPosters === null) {
+//     searchedPosterPath = "no-image-avail.png"; 
+// } else {
+//     searchedPosterPath = `https://image.tmdb.org/t/p/w200${searchedPosters}`
+// }

@@ -1,6 +1,8 @@
 body {
-    background-color:green;
+    background-color: whitesmoke;
 }
+
+
 
 .jumbotron {
     background-image: url("https://media.giphy.com/media/3osxYliokw0RKomKcg/giphy.gif");
@@ -23,11 +25,16 @@ body {
 #title-input {
     float: left;
     width: 85%;
+    margin-right: 0px;
 }
 
 #search-btn {
     float: right;
     width: 10%;
+    font-size: 15px;
+    text-align: center;
+    padding: 7px;
+    margin-left: 0px;
 }
 
 .searched-posters {
@@ -35,12 +42,35 @@ body {
   display: inline-block;
 }
 
+/* .card-body {
+  width: 500px;
+}
+
+.d-block {
+  width: 500px;
+} */
+
+div.similar-posters{
+  width: 80%; /* for example */
+  margin: auto;
+}
+
+.carousel-inner > .item > img, 
+.carousel-inner > .item > a > img{
+width: 100%; /* use this, or not */
+margin: auto;
+}
+
+.carousel-slide {
+  margin: 0 auto; 
+}
+
+.carousel-item active {
+  margin: auto;
+}
 
 
-
-
-
-
+/* 
 @media (max-width: 768px) {
     .carousel-inner .carousel-item > div {
         display: none;
@@ -57,7 +87,7 @@ body {
 }
 
 /* display 3 */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     
     .carousel-inner .carousel-item-right.active,
     .carousel-inner .carousel-item-next {
@@ -73,13 +103,13 @@ body {
 .carousel-inner .carousel-item-right,
 .carousel-inner .carousel-item-left{ 
   transform: translateX(0);
-}
+} */
 
 
 
 
 
-.multi-item-carousel{
+/* .multi-item-carousel{
     .carousel-inner{
       > .item{
         transition: 500ms ease-in-out left;
@@ -114,4 +144,4 @@ body {
       }
     }
   }
-  
+   */ 
