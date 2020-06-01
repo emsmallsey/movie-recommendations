@@ -54,6 +54,7 @@ p.lead {
 .card-text {
   font-family:'Teko', sans-serif;
   font-weight: 300 ;
+  font-size: 15px;
 }
 
 h2 {
