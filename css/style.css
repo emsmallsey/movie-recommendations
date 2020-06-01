@@ -18,6 +18,7 @@ body {
 p.lead {
   font-size: 25px;
   font-family: 'Teko', sans-serif;
+  font-weight: 500;
 }
 
 #title-input {
@@ -33,6 +34,7 @@ p.lead {
     text-align: center;
     padding: 7px;
     margin-left: 0px;
+    font-family: 'Bebas Neue', cursive;
 }
 
 .searched-posters {
@@ -40,35 +42,47 @@ p.lead {
   display: inline-block;
 }
 
-/* .card-body {
-  width: 500px;
+.card-title {
+  font-family: 'Bebas Neue', cursive;
 }
 
-.d-block {
-  width: 500px;
-} */
+.btn-outline-dark {
+  font-family:'Teko', sans-serif;
+  font-weight: 300;
+}
+
+.card-text {
+  font-family:'Teko', sans-serif;
+  font-weight: 300 ;
+}
 
 h2 {
   font-family: 'Bebas Neue', cursive;
 }
 
-div.similar-posters{
-  width: 100%; /* for example */
-  margin: auto;
-}
-
-.carousel-inner > .item > img, 
-.carousel-inner > .item > a > img{
-width: 100%; /* use this, or not */
-margin: auto;
-}
-
-.carousel-slide {
+.carousel-inner > .carousel-item > .active{
   margin: 0 auto; 
 }
 
-div.carousel-item active {
-  margin: auto;
+.watch-next-img {
+  max-width: 100px;
+  margin: 15px, 15px;
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-image: none;
+}
 
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: rgb(23, 162, 184);
+}

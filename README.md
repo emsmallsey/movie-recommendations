@@ -15,7 +15,7 @@ A simple application that uses the TMDB API to recommend similar TV shows to a u
 * Make an external data source request
 
 ## APPROACH USED
-I developed the basic logic first, leaving the complex design logic to last. 
+I developed the basic logic first, leaving the complex design logic to last. This caused issues as I underestimated the effect responsive design would have on the logic.  
 
 ## CHALLENGES FACED
 * Planning - I did not spend enough time planning how the complex design feature would affect the basic logic, and therefore spent a lot of time trying to make carousels work, leaving not a lot of time to spend on other additional features. 

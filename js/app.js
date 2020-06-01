@@ -58,31 +58,27 @@ function drawSimilarResults(_similarResults) {
                         
                     }))
                 }  
-                
-                
-            }
+    }
 }
-
-
 
 function addMyList(_posterPath, _possibleTitles) {
     console.log("watch")
-    $(".watch-next-items").prepend(`
-                <img src="${_posterPath}" class="card-img"  alt="${_possibleTitles}" max-width="100px">
+    $(".watch-next-items").append(`
+                <a href="https://www.netflix.com/search?q=${_possibleTitles}" target="new window">
+                <img src="${_posterPath}" class="card-img watch-next-img"  alt="${_possibleTitles}" max-width="100px">
+                </a>
             `)
-            
 }
 
 // ***** On Ready *****
 $(() => {
 
-    
-    // !!! On Search Click !!!
     $("#search-btn").on('click', async() => { 
         
         $("#searched-results").children().remove();
         await $(".first").addClass("active");
         $("#similar-carousel-items-wrapper").empty();
+        $("#watch-next-heading").empty();
 
         let searched = $("#title-input").val();
         const idQuery = await queryAPI(searched); 
@@ -94,57 +90,9 @@ $(() => {
         $('#searched-results').append(`<h2 id="search-heading">Similar shows for ${searchedTitles}</h2>`)
         
         const similarResults = await querySimilar(imdbID);
-        $(".watch-next-heading").append(`<h2>Watch Next</h2>`);
+        $("#watch-next-heading").append(`<h2>Watch Next</h2>`);
         drawSimilarResults(similarResults);
         
-        
-        
         })
-        
     });
-        
-        
-        
-// <div class="card bg-dark text-white" data-toggle="collapse" data-target="#collapse-material" aria-expanded="false" aria-controls="collapse-material">
-// <img src="https://image.tmdb.org/t/p/w500${similarResults.results[i].poster_path}" class="card-img" alt="...">
-// <div class="card-img-overlay">
-//  <p class="card-text collapse" id="collapse-material">${similarResults.results[i].overview}</p>
-// </div>
-// </div>
-
-
-
-
-// for(let i=0; i<3; i++) {
-        
-//     //!!! Drawing Search Results !!!
-//         const searchedTitles = idQuery.results[i].name;
-//         let searchedPosters = idQuery.results[i].poster_path;
-//         const imdbID = idQuery.results[i].id; 
-//         let searchedPosterPath;
-
-//         if(searchedPosters === null) {
-//             searchedPosterPath = "no-image-avail.png"; 
-//         } else {
-//             searchedPosterPath = `https://image.tmdb.org/t/p/w200${searchedPosters}`
-//         }
     
-//         $('#searched-results').append(`
-//                     <div id="${imdbID}" class="searched-posters">
-//                         <img class="card-img" src="${searchedPosterPath}" alt="${searchedTitles}">
-//                     </div>
-//         `)
-    
-//         // !!! Drawing Similar Results !!!        
-//         $(`#${imdbID}`).on('click', (async() => {
-//             console.log('clicked');
-
-
-
-// let searchedPosters = idQuery.results[0].poster_path;
-// let searchedPosterPath;
-// if(searchedPosters === null) {
-//     searchedPosterPath = "no-image-avail.png"; 
-// } else {
-//     searchedPosterPath = `https://image.tmdb.org/t/p/w200${searchedPosters}`
-// }
